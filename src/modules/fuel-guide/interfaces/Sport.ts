@@ -1,5 +1,6 @@
-import type { GenericOption } from "@/modules/fuel-guide/interfaces/GenericOption";
-import { Bike, Footprints } from "lucide-vue-next";
+import { Bike, Footprints } from 'lucide-vue-next';
+
+import type { GenericOption } from '@/common/components/generic-selector/GenericOption';
 
 export enum SportType {
   Running = 'running',
@@ -12,7 +13,7 @@ const bikeOption: SportOption<typeof Bike> = {
   id: SportType.Cycling,
   label: 'Cycling',
   icon: Bike,
-}
+};
 const runningOption: SportOption<typeof Footprints> = {
   id: SportType.Running,
   label: 'Running',

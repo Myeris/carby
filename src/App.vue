@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import Default from '@/common/layouts/Default.vue';
-import Header from '@/common/components/Header.vue';
-import HomePage from '@/pages/HomePage.vue'
+  import Footer from '@/common/components/footer/Footer.vue';
+  import Header from '@/common/components/header/Header.vue';
+  import Page from '@/common/layouts/page/Page.vue';
+  import HomePage from '@/pages/HomePage.vue';
 </script>
 
 <template>
-  <Default>
+  <Page>
     <template #header>
       <Header />
     </template>
@@ -13,7 +14,9 @@ import HomePage from '@/pages/HomePage.vue'
     <template #main>
       <HomePage />
     </template>
-  </Default>
-</template>
 
-<style scoped></style>
+    <template #footer>
+      <Footer />
+    </template>
+  </Page>
+</template>

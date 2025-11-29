@@ -1,11 +1,12 @@
-import type { GenericOption } from "@/modules/fuel-guide/interfaces/GenericOption";
-import { Thermometer, ThermometerSnowflake, ThermometerSun } from "lucide-vue-next";
-import { capitalize } from "vue";
+import { Thermometer, ThermometerSnowflake, ThermometerSun } from 'lucide-vue-next';
+import { capitalize } from 'vue';
+
+import type { GenericOption } from '@/common/components/generic-selector/GenericOption';
 
 export enum WeatherType {
-  Cold = "cold",
-  Mild = "mild",
-  Hot = "hot",
+  Cold = 'cold',
+  Mild = 'mild',
+  Hot = 'hot',
 }
 
 export type WeatherOption<Icon> = GenericOption<WeatherType, Icon>;
@@ -13,16 +14,18 @@ export type WeatherOption<Icon> = GenericOption<WeatherType, Icon>;
 const coldOption: WeatherOption<typeof ThermometerSnowflake> = {
   id: WeatherType.Cold,
   label: capitalize(WeatherType.Cold),
-  icon: ThermometerSnowflake
+  icon: ThermometerSnowflake,
 };
 const mildOption: WeatherOption<typeof Thermometer> = {
   id: WeatherType.Mild,
   label: capitalize(WeatherType.Mild),
-  icon: Thermometer
+  icon: Thermometer,
 };
 const hotOption: WeatherOption<typeof ThermometerSun> = {
   id: WeatherType.Hot,
   label: capitalize(WeatherType.Hot),
-  icon: ThermometerSun
+  icon: ThermometerSun,
 };
-export const weatherOptions: WeatherOption<typeof ThermometerSnowflake | typeof Thermometer | typeof ThermometerSun>[] = [coldOption, mildOption, hotOption];
+export const weatherOptions: WeatherOption<
+  typeof ThermometerSnowflake | typeof Thermometer | typeof ThermometerSun
+>[] = [coldOption, mildOption, hotOption];

@@ -3,4 +3,3 @@ export interface GenericOption<Type, Icon = undefined> {
   label: string;
   icon?: Icon;
 }
-

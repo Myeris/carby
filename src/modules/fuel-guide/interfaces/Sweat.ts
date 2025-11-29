@@ -1,36 +1,34 @@
-import { capitalize } from "@vue/shared";
-import type { GenericOption } from "./GenericOption";
+import { capitalize } from '@vue/shared';
+import { Droplet, DropletOff, Droplets } from 'lucide-vue-next';
+
+import type { GenericOption } from '@/common/components/generic-selector/GenericOption';
 
 export enum SweatLevel {
-    VeryLow = 'not at all',
-    Low = 'a little',
-    Medium = 'moderately',
-    High = 'a lot',
-    VeryHigh = 'it\'s pouring',
+  Low = 'not that much',
+  Medium = 'moderately',
+  High = "it's pouring",
 }
 
-export type SweatLevelOption = GenericOption<SweatLevel>;
+export type SweatLevelOption<Icon> = GenericOption<SweatLevel, Icon>;
 
-const veryLowOption: SweatLevelOption = {
-    id: SweatLevel.VeryLow,
-    label: capitalize(SweatLevel.VeryLow),
-
+const lowOption: SweatLevelOption<typeof DropletOff> = {
+  id: SweatLevel.Low,
+  label: capitalize(SweatLevel.Low),
+  icon: DropletOff,
 };
-const lowOption: SweatLevelOption = {
-    id: SweatLevel.Low,
-    label: capitalize(SweatLevel.Low),
+const mediumOption: SweatLevelOption<typeof Droplet> = {
+  id: SweatLevel.Medium,
+  label: capitalize(SweatLevel.Medium),
+  icon: Droplet,
 };
-const mediumOption: SweatLevelOption = {
-    id: SweatLevel.Medium,
-    label: capitalize(SweatLevel.Medium),
-};
-const highOption: SweatLevelOption = {
-    id: SweatLevel.High,
-    label: capitalize(SweatLevel.High),
-};
-const veryHighOption: SweatLevelOption = {
-    id: SweatLevel.VeryHigh,
-    label: capitalize(SweatLevel.VeryHigh),
+const highOption: SweatLevelOption<typeof Droplets> = {
+  id: SweatLevel.High,
+  label: capitalize(SweatLevel.High),
+  icon: Droplets,
 };
 
-export const sweatLevelOptions: SweatLevelOption[] = [veryLowOption, lowOption, mediumOption, highOption, veryHighOption];
+export const sweatLevelOptions: SweatLevelOption<typeof DropletOff>[] = [
+  lowOption,
+  mediumOption,
+  highOption,
+];

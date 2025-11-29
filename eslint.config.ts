@@ -37,6 +37,14 @@ export default defineConfigWithVueTs(
   {
     rules: {
       'vue/multi-word-component-names': 'off',
+      'no-multiple-empty-lines': [
+        'error',
+        {
+          max: 1,
+          maxEOF: 1,
+          maxBOF: 0,
+        },
+      ],
     },
   },
   skipFormatting,

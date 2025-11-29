@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import type { PrimitiveProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import type { ButtonVariants } from "./index.ts"
-import { Primitive } from "reka-ui"
-import { cn } from "@/common/lib/utils.ts"
-import { buttonVariants } from "./index.ts"
+  import type { PrimitiveProps } from 'reka-ui';
+  import { Primitive } from 'reka-ui';
+  import type { HTMLAttributes } from 'vue';
 
-interface Props extends PrimitiveProps {
-  variant?: ButtonVariants["variant"]
-  size?: ButtonVariants["size"]
-  class?: HTMLAttributes["class"]
-}
+  import { cn } from '@/common/lib/utils.ts';
 
-const props = withDefaults(defineProps<Props>(), {
-  as: "button",
-})
+  import type { ButtonVariants } from './index.ts';
+  import { buttonVariants } from './index.ts';
+
+  interface Props extends PrimitiveProps {
+    variant?: ButtonVariants['variant'];
+    size?: ButtonVariants['size'];
+    class?: HTMLAttributes['class'];
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    as: 'button',
+  });
 </script>
 
 <template>
@@ -22,8 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
     data-slot="button"
     :as="as"
     :as-child="asChild"
-    :class="cn(buttonVariants({ variant, size }), props.class)"
-  >
+    :class="cn(buttonVariants({ variant, size }), props.class)">
     <slot />
   </Primitive>
 </template>
