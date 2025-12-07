@@ -1,8 +1,15 @@
 import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
-import { defineComponent, h } from 'vue';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { computed, defineComponent, h, ref } from 'vue';
 
 import GenericSelector from './GenericSelector.vue';
+
+const isLargeScreenMock = ref(false);
+vi.mock('@/common/composables/use-theme/useTheme.ts', () => ({
+  useTheme: () => ({
+    isLargeScreen: computed(() => isLargeScreenMock.value),
+  }),
+}));
 
 const iconStub = defineComponent({
   name: 'IconStub',
@@ -74,6 +81,10 @@ function mountGenericSelector(options = defaultOptions) {
 }
 
 describe('GenericSelector', () => {
+  beforeEach(() => {
+    isLargeScreenMock.value = true;
+  });
+
   it('renders the provided title and options', () => {
     const wrapper = mountGenericSelector();
 
@@ -101,4 +112,3 @@ describe('GenericSelector', () => {
     expect(optionWithIcon.find('[data-test="icon-stub"]').exists()).toBe(true);
   });
 });
-

@@ -34,12 +34,16 @@ describe('Carbs result', () => {
       result: reactive({
         carb: 0,
       }),
+      state: reactive({
+        duration: 0,
+      }),
       isLoading: ref(false),
     };
   });
 
   it('displays recommended carb intake and gel guidance', () => {
     formComposableMock.useFormReturn.result!.carb = 90;
+    formComposableMock.useFormReturn.state!.duration = 120;
 
     const wrapper = mount(Carbs, {
       global: {
@@ -52,8 +56,8 @@ describe('Carbs result', () => {
 
     expect(wrapper.text()).toContain('Recommended intake');
     expect(wrapper.text()).toContain('90');
-    expect(wrapper.text()).toContain('3 gels');
-    expect(wrapper.text()).toContain('every 20 minutes');
+    expect(wrapper.text()).toContain('6 gels');
+    expect(wrapper.text()).toContain('every 35 minutes');
   });
 
   it('shows the no-carb message when the recommendation is zero', () => {
