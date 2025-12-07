@@ -13,12 +13,14 @@
   const tabletMg = 300;
   const electrolytes = computed<number>(() => result.electrolyte ?? 0);
   const tabletIntake = computed<number>(() => round(electrolytes.value / tabletMg));
+  const totalElectrolytes = computed<number>(() => electrolytes.value * durationPercentage.value);
   const totalElectrolytesBasedOnDuration = computed<{
     value: number;
     unit: 'mg' | 'g';
-  }>(() => mgToG(electrolytes.value * durationPercentage.value));
+  }>(() => mgToG(totalElectrolytes.value));
   const duration = computed<number>(() => round(60 / tabletIntake.value));
   const durationPercentage = computed<number>(() => (state.duration ?? 0) / 60);
+  const totalTabletIntake = computed<number>(() => round(totalElectrolytes.value / tabletMg));
 </script>
 
 <template>
@@ -32,7 +34,9 @@
       <SkeletonItem :isLoading="isLoading">
         <p>
           That's <strong>{{ totalElectrolytesBasedOnDuration.value }}</strong>
-          {{ totalElectrolytesBasedOnDuration.unit }} total for your workout
+          {{ totalElectrolytesBasedOnDuration.unit }} total or {{ totalTabletIntake }} tablet ({{
+            tabletMg
+          }}mg each) for your workout
         </p>
       </SkeletonItem>
       <SkeletonItem :isLoading="isLoading">
@@ -40,7 +44,7 @@
           That's about <strong>{{ tabletIntake }}</strong> tablet{{
             tabletIntake > 1 ? 's' : ''
           }}
-          ({{ tabletMg }}mg each) every {{ duration }} minutes
+          every {{ duration }} minutes
         </p>
       </SkeletonItem>
     </template>

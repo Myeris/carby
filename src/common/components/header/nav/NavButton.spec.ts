@@ -3,10 +3,17 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { computed, defineComponent, h, markRaw, ref } from 'vue';
 
 const isScrolledMock = ref(false);
+const isLargeScreenMock = ref(false);
 
 vi.mock('@/common/composables/useNav.ts', () => ({
   useNav: () => ({
     isScrolled: computed(() => isScrolledMock.value),
+  }),
+}));
+
+vi.mock('@/common/composables/use-theme/useTheme.ts', () => ({
+  useTheme: () => ({
+    isLargeScreen: computed(() => isLargeScreenMock.value),
   }),
 }));
 
@@ -46,6 +53,7 @@ const mockLink = {
 describe('NavButton', () => {
   beforeEach(() => {
     isScrolledMock.value = false;
+    isLargeScreenMock.value = true;
   });
 
   it('renders the provided link', () => {
@@ -62,7 +70,7 @@ describe('NavButton', () => {
 
     const anchor = wrapper.get('a');
     expect(anchor.attributes('href')).toBe(mockLink.path);
-    expect(anchor.text()).toContain(mockLink.name);
     expect(wrapper.find('[data-test="dummy-icon"]').exists()).toBe(true);
+    expect(anchor.text()).toContain(mockLink.name);
   });
 });

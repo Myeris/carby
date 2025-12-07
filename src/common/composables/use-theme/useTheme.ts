@@ -1,4 +1,4 @@
-import { useDark, usePreferredDark, useToggle } from '@vueuse/core';
+import { useDark, useMediaQuery, usePreferredDark, useToggle } from '@vueuse/core';
 import { onMounted } from 'vue';
 
 export const THEME_STORAGE_KEY = 'carby-color-scheme';
@@ -10,6 +10,8 @@ const isDark = useDark({
 
 const toggleDark = useToggle(isDark);
 
+const isLargeScreen = useMediaQuery('(min-width: 40rem)');
+
 export function useTheme() {
   onMounted(() => {
     const prefersDark = usePreferredDark();
@@ -20,6 +22,7 @@ export function useTheme() {
 
   return {
     isDark,
+    isLargeScreen,
     toggleDark,
   };
 }
