@@ -7,14 +7,16 @@ const themeMocks = vi.hoisted(() => {
   const toggleDarkMock = vi.fn();
   const isDarkRef = { value: false } as Ref<boolean>;
   const preferredDarkRef = { value: false } as Ref<boolean>;
+  const mediaQueryRef = { value: false } as Ref<boolean>;
 
-  return { toggleDarkMock, isDarkRef, preferredDarkRef };
+  return { toggleDarkMock, isDarkRef, preferredDarkRef, mediaQueryRef };
 });
 
 vi.mock('@vueuse/core', () => ({
   useDark: vi.fn(() => themeMocks.isDarkRef),
   usePreferredDark: vi.fn(() => themeMocks.preferredDarkRef),
   useToggle: vi.fn(() => themeMocks.toggleDarkMock),
+  useMediaQuery: vi.fn(() => themeMocks.isDarkRef),
 }));
 
 import { useTheme } from './useTheme.ts';
@@ -31,6 +33,7 @@ describe('useTheme', () => {
     themeMocks.isDarkRef.value = false;
     themeMocks.preferredDarkRef.value = false;
     themeMocks.toggleDarkMock.mockClear();
+    themeMocks.mediaQueryRef.value = false;
   });
 
   it('exposes the reactive dark state and toggle fn', () => {

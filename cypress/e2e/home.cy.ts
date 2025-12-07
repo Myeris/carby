@@ -158,7 +158,8 @@ describe('Carby home experience', () => {
       .parent()
       .within(() => {
         cy.contains('Recommended intake').should('contain', '63');
-        cy.contains("That's about").should('contain', '2').and('contain', 'gels');
+        cy.contains("That's").should('contain', '126 g').and('contain', '4 gels');
+        cy.contains('Take').should('contain', '1 gel').and('contain', 'every 35 minutes');
       });
 
     cy.contains('h4', 'Hydration')

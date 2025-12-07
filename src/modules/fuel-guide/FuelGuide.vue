@@ -13,7 +13,7 @@
 <template>
   <section
     :id="link.id"
-    class="mx-auto mt-12 flex min-h-screen w-full max-w-4xl scroll-mt-28 flex-col gap-8 px-4 text-center sm:px-6">
+    class="mx-auto mt-12 flex min-h-screen w-full scroll-mt-28 flex-col gap-8 px-4 text-center sm:px-6">
     <h2 class="text-3xl font-semibold tracking-tight text-balance md:text-4xl">
       {{ link.name }}
     </h2>

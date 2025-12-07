@@ -7,12 +7,13 @@
   import ResultItem from '@/common/layouts/result-item/ResultItem.vue';
   import { useForm } from '@/modules/fuel-guide/composables/useForm';
 
-  const { result, isLoading } = useForm()!;
+  const { result, isLoading, state } = useForm()!;
 
   const gelCarbs = 30;
+  const duration = 35;
   const carb = computed<number>(() => result.carb ?? 0);
-  const gelIntake = computed<number>(() => round(carb.value / gelCarbs));
-  const duration = computed<number>(() => round(60 / gelIntake.value));
+  const totalCarb = computed<number>(() => round(carb.value * (state.duration / 60)));
+  const gelIntake = computed<number>(() => round(totalCarb.value / gelCarbs));
 </script>
 
 <template>
@@ -26,10 +27,14 @@
 
       <SkeletonItem :isLoading="isLoading">
         <p>
-          That's about <strong>{{ gelIntake }}</strong> gel{{ gelIntake > 1 ? 's' : '' }} ({{
-            gelCarbs
-          }}g each) every {{ duration }} minutes
+          That's {{ totalCarb }} g or about <strong>{{ gelIntake }}</strong> gel{{
+            gelIntake > 1 ? 's' : ''
+          }}
         </p>
+      </SkeletonItem>
+
+      <SkeletonItem :isLoading="isLoading">
+        <p>Take <strong>1</strong> gel ({{ gelCarbs }}g each) every {{ duration }} minutes</p>
       </SkeletonItem>
     </template>
     <template v-else>

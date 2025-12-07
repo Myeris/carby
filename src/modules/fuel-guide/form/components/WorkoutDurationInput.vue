@@ -14,7 +14,7 @@
 
 <template>
   <FormItem title="How long will your workout be?">
-    <InputGroup class="w-full sm:w-3xs">
+    <InputGroup class="w-3xs">
       <InputGroupInput type="number" :min="0" @update:modelValue="updateWorkoutDuration" />
       <InputGroupAddon>
         <Clock />
